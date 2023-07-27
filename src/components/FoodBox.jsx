@@ -1,25 +1,28 @@
 // Your code here
 import React from "react";
+import { Card, Image, Button } from "antd";
 
-function FoodBox({props, deleteFood}) {
+function FoodBox({ props, deleteFood }) {
+  
+
+
   return (
-    <div>
-      <div>
-        <h4>{props.name}</h4>
+    <>
+      <Card title={props.name} style={{ width: 300 }}>
+        <div>
+          <Image src={props.image} width={250} />
 
-        <img src={props.image} style={{ height: "200px" }} />
+          <p>Calories: {props.calories}</p>
+          <p>Servings {props.servings}</p>
 
-        <p>Calories: {props.calories}</p>
-        <p>Servings {props.servings}</p>
+          <p>
+            <b>Total Calories: {props.servings * props.calories} </b> kcal
+          </p>
 
-        <p>
-          <b>Total Calories: {props.servings * props.calories} </b>{" "}
-          kcal
-        </p>
-
-        <button onClick={() => deleteFood(props.id)}>Delete</button>
-      </div>
-    </div>
+          <Button onClick={() => deleteFood(props.id)}>Delete</Button>
+        </div>
+      </Card>
+    </>
   );
 }
 

@@ -1,15 +1,14 @@
 // Your code here
 import React from "react";
 import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
-
+import { v4 as uuidv4 } from "uuid";
+import { Button, Form, Input } from "antd";
 
 function AddFoodForm(props) {
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [calories, setCalories] = useState(0);
   const [servings, setServings] = useState(0);
-
 
   const handleNameInput = (e) => setName(e.target.value);
   const handleImageInput = (e) => setImage(e.target.value);
@@ -18,33 +17,54 @@ function AddFoodForm(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newFood = { name, image, calories, servings, id: uuidv4()};
+    const newFood = { name, image, calories, servings, id: uuidv4() };
 
-    props.addFood(newFood)
+    props.addFood(newFood);
 
-    setName("")
-    setImage("")
-    setCalories(0)
-    setServings(0)
+    setName("");
+    setImage("");
+    setCalories(0);
+    setServings(0);
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>Name:</label>
-        <input type="text" name="name" onChange={handleNameInput} />
+      <h2>Add new Food</h2>
+      <Form
+        name="basic"
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        style={{
+          maxWidth: 600,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+        onSubmit={handleSubmit}
+      >
+        <Form.Item label="Name" name="name">
+          <Input onChange={handleNameInput} />
+        </Form.Item>
 
-        <label>Image:</label>
-        <input type="text" name="image" onChange={handleImageInput} />
+        <Form.Item label="Image" name="image" type="text">
+          <Input onChange={handleImageInput} />
+        </Form.Item>
 
-        <label>Calories:</label>
-        <input type="number" name="calories" onChange={handleCaloriesInput} />
+        <Form.Item label="Calories" name="calories" type="number">
+          <Input onChange={handleCaloriesInput} />
+        </Form.Item>
 
-        <label>Servings:</label>
-        <input type="number" name="servings" onChange={handleServingsInput} />
+        <Form.Item label="Servings" name="servings" type="number">
+          <Input onChange={handleServingsInput} />
+        </Form.Item>
 
-        <button type="submit">Create</button>
-      </form>
+        <Button type="primary" htmlType="submit">Create</Button>
+        {/* <Button type="submit">Create</Button> */}
+      </Form>
     </div>
   );
 }
